@@ -42,16 +42,14 @@ public class UserServiceV2 {
                 .orElseThrow(IllegalArgumentException::new);
 
         user.updateName(request.getName());
-        userRepository.save(user);
+//        userRepository.save(user);  // 생략 가능, 영속성 컨텍스트의 변경 감지(Dirty Check) 덕분
     }
 
     // delete User
     @Transactional
     public void deleteUser(String name) {
-        User user = userRepository.findByName(name);
-        if (user == null) {
-            throw new IllegalArgumentException();
-        }
+        User user = userRepository.findByName(name)
+                .orElseThrow(IllegalArgumentException::new);
 
         userRepository.delete(user);
     }

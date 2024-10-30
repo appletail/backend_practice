@@ -10,29 +10,29 @@ import java.util.List;
 
 @RestController
 public class UserController {
-    private final UserServiceV2 userService;
+    private final UserServiceV2 userServiceV2;
 
-    public UserController(UserServiceV2 userService) {
-        this.userService = userService;
+    public UserController(UserServiceV2 userServiceV2) {
+        this.userServiceV2 = userServiceV2;
     }
 
     @PostMapping("/user")  // POST /user
     public void saveUser(@RequestBody UserCreateRequest request) {
-        userService.saveUser(request);
+        userServiceV2.saveUser(request);
     }
 
     @GetMapping("/user")
     public List<UserResponse> getUsers() {
-        return userService.getUsers();
+        return userServiceV2.getUsers();
     }
 
     @PutMapping("/user")
     public void updateUser(@RequestBody UserUpdateRequest request) {
-        userService.updateUser(request);
+        userServiceV2.updateUser(request);
     }
 
     @DeleteMapping("/user")
     public void deleteUser(@RequestParam String name) {
-        userService.deleteUser(name);
+        userServiceV2.deleteUser(name);
     }
 }
